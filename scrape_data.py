@@ -1,18 +1,33 @@
 import json, requests, os
 
+# Initialize essential constants from the NAMUS website
+
 ORIGIN = 'https://www.namus.gov'
 API_ENDPOINT = ORIGIN + "/api"
 STATE_ENDPOINT = API_ENDPOINT + "/CaseSets/NamUs/States"
 CASE_ENDPOINT = API_ENDPOINT + "/CaseSets/NamUs/{case_type}/Cases/{namus_number}"
 SEARCH_ENDPOINT = API_ENDPOINT + "/CaseSets/NamUs/{case_type}/Search"
 DATA_OUTPUT = "./output/{case_type}/{case_type}.json"
+
+# the site has a limit to the search not to overload.  
+# The database is huge enough to exceed the limit. 
+# Thats why I load the data based on individual states to future proof.
+# TODO make it based on size and unlimited
+  
 SEARCH_LIMIT = 10000
+
+# the canvas is taken from inspected request when you search on the namus site
+
 PAYLOAD_NAME = 'search_payload.json'
 DIRECTORY_PATH = os.path.dirname(__file__)
 PAYLOAD_PATH = os.path.join(DIRECTORY_PATH, PAYLOAD_NAME)
 
+# predefining all current case ids in NAMUS database
 search_cases = []
+# predefining all full cases about people not included in OUR database and waiting to be added
 database_cases = []
+
+# took from the inspected request on namus site
 
 search_headers = {
     'Accept' : 'application/json',
@@ -23,7 +38,9 @@ search_headers = {
     'Connection': 'keep-alive',
 }
 
-def fetch_states(test=False):
+# here it gets the list of NAMUS from the site itself
+
+def fetch_namus_states(test=False):
     if test == True:
         states_info = [{"name" : "Alabama"},{"name" : "Alaska"}]
     
@@ -39,13 +56,18 @@ def load_payload():
         payload_origin = file.read()
     return payload_origin
 
+# here the template of payload is filled
+# it will open the template given and change the variable values for the arguments given
 
 def fill_template(template, **kwargs):
     for key, value in kwargs.items():
         template = template.replace(f"{{{key}}}", str(value))
     return template
 
-def fetch_search(payload_origin, states_info, case_type="MissingPersons"):
+# this function will get all case id numbers from the NAMUS database at the given moment
+
+
+def fetch_namus_search(payload_origin, states_info, case_type="MissingPersons"):
     print("> Fetching search")
     for state_info in states_info:
         state = state_info['name']
@@ -72,7 +94,17 @@ def fetch_search(payload_origin, states_info, case_type="MissingPersons"):
 
 
 
-def fetch_database(cases, case_type="MissingPersons"):
+def pull_our_database():
+    print("> Pulling our database")
+    
+
+def see_whats_new():
+    print("> Searching for new content") 
+
+    
+# Here I fetch the full data from the database about persons no 
+
+def fetch_namus_database(cases, case_type="MissingPersons"):
     print("> Fetching database")
     for case in cases:
         namus_number = case["namus2Number"]
@@ -83,20 +115,28 @@ def fetch_database(cases, case_type="MissingPersons"):
         response = requests.get(url, headers=search_headers)
         result = json.loads(response.content)
         database_cases.append(result)
+def
 
+def push_to_our_database():
+    print("> Pushing cases to our database")
 
 
 def main():
-    states_info = fetch_states(test=True)
+    states_info = fetch_namus_states(test=True)
     search_payload_origin = load_payload()
-    fetch_search(search_payload_origin, states_info)
+    fetch_namus_search(search_payload_origin, states_info)
+    pull_our_database()
+    see_whats_new()
+
+
 
     print("\n", search_cases, "\n")
 
-    fetch_database(search_cases)
+    fetch_namus_database(search_cases)
 
     print("\n", database_cases, "\n")
 
+    push_to_our_database()
 
 if __name__ == "__main__":
     main()

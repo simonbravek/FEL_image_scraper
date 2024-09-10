@@ -1,0 +1,769 @@
+{
+    "documentFragments": [
+        "birthDate"
+    ],
+    "orderSpecifications": [
+        {
+            "direction": "Descending",
+            "field": "dateOfLastContact"
+        }
+    ],
+    "predicates": [
+        {
+            "field": "namus2Number",
+            "operator": "EqualTo",
+            "value": "NAMUS_CASE_NUMBER"
+        },
+        {
+            "field": "ncmecNumber",
+            "operator": "Contains",
+            "value": "NCMEC_CASE_NUMBER"
+        },
+        {
+            "field": "firstName",
+            "operator": "Contains",
+            "value": "LEGAL_FIRST_NAME"
+        },
+        {
+            "field": "middleName",
+            "operator": "Contains",
+            "value": "MIDDLE_NAME"
+        },
+        {
+            "field": "lastName",
+            "operator": "Contains",
+            "value": "LEGAL_LAST_NAME"
+        },
+        {
+            "field": "nicknames",
+            "operator": "Contains",
+            "value": "{CHOSEN_NICKNAME}"
+        },
+        {
+            "field": "heightTo",
+            "operator": "GreaterThanOrEqualTo",
+            "value": "{MIN_HEIGHT_INCHES}"
+        },
+        {
+            "field": "heightFrom",
+            "operator": "LessThanOrEqualTo",
+            "value": "{MAX_HEIGHT_INCHES}"
+        },
+        {
+            "field": "weightTo",
+            "operator": "GreaterThanOrEqualTo",
+            "value": "{MAX_WEIGHT_POUNDS}"
+        },
+        {
+            "field": "weightFrom",
+            "operator": "LessThanOrEqualTo",
+            "value": "{MIN_WEIGHT_POUNDS}"
+        },
+        {
+            "field": "computedMissingMaxAge",
+            "operator": "GreaterThanOrEqualTo",
+            "value": 20
+        },
+        {
+            "predicates": [
+                [
+                    {
+                        "field": "gender",
+                        "operator": "DoesNotExist"
+                    }
+                ],
+                [
+                    {
+                        "field": "gender",
+                        "operator": "IsIn",
+                        "values": [
+                            "Male",
+                            "Female",
+                            "Unsure",
+                            "Other"
+                        ]
+                    }
+                ]
+            ]
+        },
+        {
+            "predicates": [
+                [
+                    {
+                        "field": "ethnicities",
+                        "operator": "DoesNotMatch",
+                        "predicates": [
+                            {
+                                "field": "raceEthnicity",
+                                "operator": "Exists"
+                            }
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "field": "ethnicities",
+                        "operator": "Matches",
+                        "predicates": [
+                            {
+                                "field": "raceEthnicity",
+                                "operator": "IsIn",
+                                "values": [
+                                    "White / Caucasian",
+                                    "Hispanic / Latino",
+                                    "Hawaiian / Pacific Islander",
+                                    "Asian",
+                                    "Uncertain",
+                                    "Other"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            ]
+        },
+        {
+            "field": "tribalAffiliation",
+            "operator": "IsIn",
+            "values": [
+                "No"
+            ]
+        },
+        {
+            "field": "createdDateTimeMonth",
+            "from": 1,
+            "operator": "Between",
+            "to": 2
+        },
+        {
+            "field": "dateOfLastContact",
+            "operator": "LessThanOrEqualTo",
+            "value": "2014-07-01T22:00:00.000Z"
+        },
+        {
+            "field": "cityOfLastContact",
+            "operator": "IsIn",
+            "values": [
+                "Brick",
+                "Dickson"
+            ]
+        },
+        {
+            "field": "countyDisplayNameOfLastContact",
+            "operator": "IsIn",
+            "values": [
+                "Alfalfa"
+            ]
+        },
+        {
+            "field": "stateOfLastContact",
+            "operator": "IsIn",
+            "values": [
+                "Connecticut",
+                "Alabama"
+            ]
+        },
+        {
+            "field": "tribalLandRelated",
+            "operator": "IsIn",
+            "values": [
+                "Yes"
+            ]
+        },
+        {
+            "field": "primaryResidenceOnTribalLand",
+            "operator": "IsIn",
+            "values": [
+                "No"
+            ]
+        },
+        {
+            "predicates": [
+                [
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "circumstancesOfDisappearance",
+                                    "operator": "Contains",
+                                    "value": "Hell"
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "circumstancesOfDisappearance",
+                                    "operator": "Contains",
+                                    "value": "no"
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "field": "notes",
+                        "operator": "Matches",
+                        "predicates": [
+                            {
+                                "field": "noteType",
+                                "operator": "IsIn",
+                                "values": [
+                                    "Circumstances"
+                                ]
+                            },
+                            {
+                                "predicates": [
+                                    [
+                                        {
+                                            "field": "noteDescription",
+                                            "operator": "Contains",
+                                            "value": "Hell"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "field": "noteDescription",
+                                            "operator": "Contains",
+                                            "value": "no"
+                                        }
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            ]
+        },
+        {
+            "predicates": [
+                [
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Eyewear"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Eyewear"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "FacialCaseId"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "FacialCaseId"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Deformity"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Deformity"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Tattoo"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Tattoo"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Other"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Other"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "AgeProgression"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "AgeProgression"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Clothing"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Clothing"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Accessories"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Accessories"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Piercing"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Piercing"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Composite"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Composite"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "ActualPhoto"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "ActualPhoto"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "ScarsAndMarks"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "ScarsAndMarks"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Amputation"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Amputation"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "predicates": [
+                            [
+                                {
+                                    "field": "images",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "imageCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Jewelry"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "field": "documents",
+                                    "operator": "Matches",
+                                    "predicates": [
+                                        {
+                                            "field": "documentCategory",
+                                            "operator": "IsIn",
+                                            "values": [
+                                                "Jewelry"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            ]
+        },
+        {
+            "field": "hairColor",
+            "operator": "IsIn",
+            "values": [
+                "Blond/Strawberry"
+            ]
+        },
+        {
+            "field": "leftEyeColor",
+            "operator": "IsIn",
+            "values": [
+                "Hazel"
+            ]
+        },
+        {
+            "field": "rightEyeColor",
+            "operator": "IsIn",
+            "values": [
+                "Hazel"
+            ]
+        },
+        {
+            "field": "vehicles",
+            "operator": "Matches",
+            "predicates": [
+                {
+                    "field": "vehicleTagNumber",
+                    "operator": "Contains",
+                    "value": "ff"
+                }
+            ]
+        }
+    ],
+    "projections": [
+        "idFormatted",
+        "dateOfLastContact",
+        "lastName",
+        "firstName",
+        "computedMissingMinAge",
+        "computedMissingMaxAge",
+        "cityOfLastContact",
+        "countyDisplayNameOfLastContact",
+        "stateDisplayNameOfLastContact",
+        "gender",
+        "raceEthnicity",
+        "modifiedDateTime",
+        "namus2Number"
+    ],
+    "skip": 0,
+    "take": 25
+}
